@@ -4,6 +4,8 @@ import App from './App';
 import { Provider } from 'react-redux';
 import store from './store';
 import 'antd-mobile/dist/antd-mobile.less';
+import './styles/reset.less';
+import './styles/common.less';
 
 ReactDOM.render(
   <React.StrictMode>

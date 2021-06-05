@@ -6,11 +6,12 @@ import PasswordLogin from '../pages/Login/PasswordLogin';
 import PhoneRegister from '../pages/Register/PhoneRegister';
 import CodeRegister from '../pages/Register/CodeRegister';
 import PasswordRegister from '../pages/Register/PasswordRegister';
-// import CountryPicker from '../components/CountryPicker';
+import CountryPicker from '../components/CountryPicker';
 
 interface RouteType {
   path: string;
-  component: FunctionComponent<RouteComponentProps>;
+  //告诉FunctionComponent可以接收RouteComponentProps
+  component: FunctionComponent<RouteComponentProps>; //默认值是个空对象参数,只有传了才有这属性
 }
 //配置route 提取出来然后遍历
 const routes: RouteType[] = [
@@ -33,6 +34,10 @@ const routes: RouteType[] = [
   {
     path: '/passwordRegister',
     component: PasswordRegister,
+  },
+  {
+    path: '/countryPicker',
+    component: CountryPicker,
   },
 ];
 export default routes;
