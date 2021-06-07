@@ -49,7 +49,8 @@ export default function CountryPicker(props: RouteComponentProps) {
   const goRegister = (code: string) => {
     return () => {
       //路由传参,使用state方式来传递参数
-      props.history.push('/phoneRegister', code);
+      //props.location.state as string  接收指定路径跳转到指定路径
+      props.history.push(props.location.state as string, code);
     };
   };
   return (

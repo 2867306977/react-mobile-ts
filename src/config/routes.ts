@@ -7,6 +7,7 @@ import PhoneRegister from '../pages/Register/PhoneRegister';
 import CodeRegister from '../pages/Register/CodeRegister';
 import PasswordRegister from '../pages/Register/PasswordRegister';
 import CountryPicker from '../components/CountryPicker';
+import Home from '../pages/Home';
 
 interface RouteType {
   path: string;
@@ -38,6 +39,10 @@ const routes: RouteType[] = [
   {
     path: '/countryPicker',
     component: CountryPicker,
+  },
+  {
+    path: '/',
+    component: Home,
   },
 ];
 export default routes;

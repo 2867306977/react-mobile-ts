@@ -7,9 +7,11 @@ import {
   WhiteSpace,
   InputItem,
   Button,
+  Toast,
 } from 'antd-mobile';
 import { useEffect, useState } from 'react';
 import { RouteComponentProps } from 'react-router-dom'; //路由组件props类型
+import { reqVerifyPhone } from '../../../api/register';
 import './index.less';
 //引入语法必须放上面 在定义变量
 const { alert } = Modal;
@@ -62,7 +64,8 @@ export default function PhoneRegister(props: RouteComponentProps) {
   const [phone, setPhone] = useState<string>('');
 
   const goCountryPicker = () => {
-    history.push('/countryPicker');
+    //传递当前路由的路径
+    history.push('/countryPicker', location.pathname);
   };
 
   //校验表单
@@ -81,21 +84,35 @@ export default function PhoneRegister(props: RouteComponentProps) {
     setFirstView(false);
   };
   //跳转到验证码注册
-  const goCodeRegister = () => {
-    //点击之后弹出一个框
-    alert('', `是否同意给${phone}发送验证码`, [
-      {
-        text: '不同意',
-      },
-      {
-        text: '同意',
-        onPress: () => history.push('/codeRegister', phone),
-        style: {
-          backgroundColor: 'red',
-          color: '#fff',
-        },
-      },
-    ]);
+  const goCodeRegister = async () => {
+    try {
+      console.log(phone);
+      //判断该号码是否被注册
+      const response = await reqVerifyPhone(phone);
+      console.log(response);
+
+      if (response.data.code === 20000) {
+        //没有注册过
+        //点击之后弹出一个框
+        alert('', `是否同意给${phone}发送验证码`, [
+          {
+            text: '不同意',
+          },
+          {
+            text: '同意',
+            onPress: () => history.push('/codeRegister', phone),
+            style: {
+              backgroundColor: 'red',
+              color: '#fff',
+            },
+          },
+        ]);
+      } else {
+        Toast.fail(response.data.message, 3);
+      }
+    } catch (e) {
+      console.log(e);
+    }
   };
   return (
     <div className="container">
