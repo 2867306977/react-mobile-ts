@@ -19,11 +19,12 @@ const validateReg = /^1[3-9][0-9]{9}$/;
 //history是路由组件的三个属性之一,所以props类型是路由组件类型(所有组件都是Route加载的)
 //定义了什么属性才能传什么,没定义是不能传的
 export default function PhoneRegister(props: RouteComponentProps) {
+  const { location, history } = props;
   //拿到国家/城市的电话号码编号
-  const code: unknown = props.location.state || '+86'; //props.location.state刚开始没有 没有就使用默认+86
+  const code: unknown = location.state || '+86'; //props.location.state刚开始没有 没有就使用默认+86
   useEffect(() => {
     //因为点进code中就会卸载之前的组件,再返回过来又要重新加载并执行挂载生命周期,可以判断有没有值来决定是否需要在弹出同意协议框
-    if (props.location.state) return;
+    if (location.state) return;
     alert(
       '注册协议及隐私政策',
       <span className="phone-register-policy">
@@ -39,7 +40,7 @@ export default function PhoneRegister(props: RouteComponentProps) {
           text: '不同意',
           onPress: () => {
             // 返回到上一个页面
-            props.history.push('/phoneLogin');
+            history.push('/phoneLogin');
           },
         },
         {
@@ -61,7 +62,7 @@ export default function PhoneRegister(props: RouteComponentProps) {
   const [phone, setPhone] = useState<string>('');
 
   const goCountryPicker = () => {
-    props.history.push('/countryPicker');
+    history.push('/countryPicker');
   };
 
   //校验表单
@@ -88,7 +89,7 @@ export default function PhoneRegister(props: RouteComponentProps) {
       },
       {
         text: '同意',
-        onPress: () => props.history.push('/codeRegister', phone),
+        onPress: () => history.push('/codeRegister', phone),
         style: {
           backgroundColor: 'red',
           color: '#fff',
@@ -102,7 +103,7 @@ export default function PhoneRegister(props: RouteComponentProps) {
         mode="light"
         icon={<Icon className="left-icon" type="left" />}
         // 点击回到phoneLogin,不用goback是因为怕没有浏览记录就返回不过去
-        onLeftClick={() => props.history.push('/phoneLogin')}>
+        onLeftClick={() => history.push('/phoneLogin')}>
         硅谷注册
       </NavBar>
       {/* 两翼留白 */}
