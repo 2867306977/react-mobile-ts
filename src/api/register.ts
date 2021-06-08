@@ -8,7 +8,7 @@ export const reqVerifyCode: (phone: string, code: string) => AxiosPromise = (
 ) => {
   return axios({
     method: 'POST',
-    url: '/api/regist/verify_code',
+    url: 'http://localhost:5000/regist/verify_code',
     //需传入参数表示给谁发的验证码 POST请求参数放入请求体中(data)
     //GET中请求参数通常查询字符串(params)
     data: { phone, code },
@@ -22,7 +22,7 @@ export const reqRegister: (phone: string, password: string) => AxiosPromise = (
 ) => {
   return axios({
     method: 'POST',
-    url: '/api/regist/user',
+    url: 'http://localhost:5000/regist/user',
     //需传入参数表示给谁发的验证码 POST请求参数放入请求体中(data)
     //GET中请求参数通常查询字符串(params)
     data: { phone, password },
@@ -33,7 +33,7 @@ export const reqRegister: (phone: string, password: string) => AxiosPromise = (
 export const reqVerifyPhone: (phone: string) => AxiosPromise = phone => {
   return axios({
     method: 'POST',
-    url: '/api/regist/verify_phone',
+    url: 'http://localhost:5000/regist/verify_phone',
     //需传入参数表示给谁发的验证码 POST请求参数放入请求体中(data)
     //GET中请求参数通常查询字符串(params)
     data: { phone },

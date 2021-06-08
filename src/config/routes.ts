@@ -1,13 +1,37 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, lazy } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 
-import PhoneLogin from '../pages/Login/PhoneLogin';
-import PasswordLogin from '../pages/Login/PasswordLogin';
-import PhoneRegister from '../pages/Register/PhoneRegister';
-import CodeRegister from '../pages/Register/CodeRegister';
-import PasswordRegister from '../pages/Register/PasswordRegister';
-import CountryPicker from '../components/CountryPicker';
-import Home from '../pages/Home';
+// 路由懒加载：1. 打包时会打包成单独js文件  2. 一上来不会加载js，需要时才加载
+const PhoneLogin = lazy(
+  () => import(/* webpackChunkName: 'PhoneLogin' */ '../pages/Login/PhoneLogin')
+);
+const PasswordLogin = lazy(
+  () =>
+    import(/*webpackChunkName: 'PasswordLogin'*/ '../pages/Login/PasswordLogin')
+);
+const PhoneRegister = lazy(
+  () =>
+    import(
+      /*webpackChunkName: 'PhoneRegister'*/ '../pages/Register/PhoneRegister'
+    )
+);
+const CodeRegister = lazy(
+  () =>
+    import(
+      /*webpackChunkName: 'CodeRegister'*/ '../pages/Register/CodeRegister'
+    )
+);
+const PasswordRegister = lazy(
+  () =>
+    import(
+      /*webpackChunkName: 'PasswordRegister'*/ '../pages/Register/PasswordRegister'
+    )
+);
+const CountryPicker = lazy(
+  () =>
+    import(/*webpackChunkName: 'CountryPicker'*/ '../components/CountryPicker')
+);
+const Home = lazy(() => import(/*webpackChunkName: 'Home'*/ '../pages/Home'));
 
 interface RouteType {
   path: string;

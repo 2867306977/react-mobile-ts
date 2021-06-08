@@ -5,7 +5,7 @@ import axios, { AxiosPromise } from 'axios';
 export const sendDigits: (phone: string) => AxiosPromise = phone => {
   return axios({
     method: 'POST',
-    url: '/api/login/digits',
+    url: 'http://localhost:5000/login/digits',
     //需传入参数表示给谁发的验证码 POST请求参数放入请求体中(data)
     //GET中请求参数通常查询字符串(params)
     data: {
@@ -21,7 +21,7 @@ export const reqLogin: (phone: string, password: string) => AxiosPromise = (
 ) => {
   return axios({
     method: 'POST',
-    url: '/api/login/user',
+    url: 'http://localhost:5000/login/user',
     //需传入参数表示给谁发的验证码 POST请求参数放入请求体中(data)
     //GET中请求参数通常查询字符串(params)
     data: {
